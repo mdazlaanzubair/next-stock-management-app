@@ -1,14 +1,13 @@
-import React from "react";
-import ThemeToggler from "../theme/ThemeToggler";
 import Link from "next/link";
-import SidebarToggler from "./SidebarToggler";
-import ProfileNav from "./ProfileNav";
+import ThemeToggler from "../theme/ThemeToggler";
 
-const TopNav = () => {
+const HomePageNav = () => {
+  const isLoggedIn = true;
+
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
-        <SidebarToggler />
+        <ThemeToggler />
       </div>
       <div className="navbar-center">
         <Link href="/" className="font-black normal-case text-xl">
@@ -16,11 +15,12 @@ const TopNav = () => {
         </Link>
       </div>
       <div className="navbar-end">
-        <ProfileNav />
-        <ThemeToggler />
+        <Link href="/dashboard" className="btn btn-primary capitalize">
+          {isLoggedIn ? "Go to Dashboard" : "Get Started"}
+        </Link>
       </div>
     </div>
   );
 };
 
-export default TopNav;
+export default HomePageNav;

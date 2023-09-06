@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGO_DB_URL")
+}
+
+model User {
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  username    String      @unique
+  email       String      @unique
+  password    String
+  image       String?
+  contact     String?     @unique
+  state       String?
+  country     String?
+  company     String?
+  business    String?
+  address     String?
+  isBlocked   Boolean
+  isDeleted   Boolean
+  userRoles   UserRole[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Role {
+  id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+  title               String              @unique
+  userRoles           UserRole[]
+  rolePermissions     RolePermission[]
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+}
+
+model Permission {
+  id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+  title               String 
+  desc                String
+  rolePermissions     RolePermission[]
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+}
+
+model UserRole {
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId  String  @db.ObjectId
+  roleId  String  @db.ObjectId
+  user    User    @relation(fields: [userId], references: [id])
+  role    Role    @relation(fields: [roleId], references: [id])
+}
+
+model RolePermission {
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  permissionId  String        @db.ObjectId
+  roleId        String        @db.ObjectId
+  permission    Permission    @relation(fields: [permissionId], references: [id])
+  role          Role          @relation(fields: [roleId], references: [id])
+}

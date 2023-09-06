@@ -11,7 +11,41 @@ const SideNav = () => {
     {
       title: "Dashboard",
       icon: "FaChartColumn",
-      link: "/",
+      link: "/dashboard",
+    },
+    {
+      title: "Access & Control",
+      icon: "FaUserLock",
+      link: null,
+      menu: [
+        {
+          title: "Roles",
+          icon: "FaCircleDot",
+          link: "/dashboard/access_control/roles",
+        },
+        {
+          title: "Permission",
+          icon: "FaCircleExclamation",
+          link: "/dashboard/access_control/permissions",
+        },
+      ],
+    },
+    {
+      title: "Users",
+      icon: "FaUsersGear",
+      link: null,
+      menu: [
+        {
+          title: "List all",
+          link: "/dashboard/users/index",
+          icon: "FaUsers",
+        },
+        {
+          title: "Create",
+          link: "/dashboard/users/create",
+          icon: "FaUserPlus",
+        },
+      ],
     },
     {
       title: "Warehouses",
@@ -27,23 +61,6 @@ const SideNav = () => {
           title: "Create",
           icon: "FaFolderPlus",
           link: "/",
-        },
-      ],
-    },
-    {
-      title: "Users",
-      icon: "FaUsersGear",
-      link: null,
-      menu: [
-        {
-          title: "List all",
-          link: "/",
-          icon: "FaUsers",
-        },
-        {
-          title: "Create",
-          link: "/",
-          icon: "FaUserPlus",
         },
       ],
     },
@@ -84,7 +101,7 @@ const SideNav = () => {
   ];
 
   return (
-    <div className={`bg-base-100 shadow-lg ${isSidebarOpen ? "w-72" : "w-24"}`}>
+    <div className={`bg-base-100 ${isSidebarOpen ? "w-72" : "w-24"}`}>
       <ul className="menu font-bold text-base lg:text-lg">
         {nav_items.map((nav_item, index) => {
           const NavIcon = FontAwesome6Icon[nav_item.icon];
