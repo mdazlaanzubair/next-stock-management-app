@@ -1,8 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 
 // to avoid adding prisma client in every stage of the application
-const prismaClient = globalThis.prisma || new PrismaClient();
-if (process.env.NODE_ENV !== "production") globalThis.prisma = prismaClient;
+// const prismaClient = globalThis.prisma || new PrismaClient();
+const prismaClient = new PrismaClient();
+// if (process.env.NODE_ENV !== "production") globalThis.prisma = prismaClient;
 
 export default prismaClient;
 
