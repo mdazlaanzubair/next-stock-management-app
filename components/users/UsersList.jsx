@@ -1,19 +1,15 @@
 "use client";
 
-import useUsersStore from "@/store/useUsersStore";
 import { useState } from "react";
-import EditUserForm from "./EditUserForm";
-import CreateUserForm from "./CreateUserForm";
+import Link from "next/link";
 
 const UsersList = () => {
   const users = [1, 2, 3, 4, 5];
   const filters = ["all", "active", "blocked"];
   const [activeFilter, setActiveFilter] = useState("all");
 
-  const setActiveUserId = useUsersStore((state) => state.setActiveUserId);
-
   return (
-    <div className="overflow-x-auto">
+    <div>
       <div className="flex flex-wrap justify-between items-center gap-3">
         <div className="flex flex-wrap justify-between items-center gap-3">
           <h1>Filters</h1>
@@ -33,15 +29,6 @@ const UsersList = () => {
             </label>
           ))}
         </div>
-        <button
-          type="button"
-          className="btn btn-outline btn-primary"
-          onClick={() =>
-            document.getElementById("create_user_form_modal").showModal()
-          }
-        >
-          Create New User
-        </button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 my-5">
         <div className="card bg-base-200 shadow">
@@ -74,18 +61,12 @@ const UsersList = () => {
                 <div className="w-auto flex flex-col">
                   <div className="font-bold">Hart Hagerty</div>
                   <div className="text-sm opacity-50">
-                    <button
-                      type="button"
+                    <Link
+                      href={`/dashboard/users/edit/${user}`}
                       className="link-hover text-primary font-semibold"
-                      onClick={() => {
-                        setActiveUserId(user);
-                        document
-                          .getElementById("edit_user_form_modal")
-                          .showModal();
-                      }}
                     >
                       @hart_hagerty
-                    </button>
+                    </Link>
                   </div>
 
                   <span className="badge badge-success mt-5">Active</span>
@@ -94,9 +75,6 @@ const UsersList = () => {
             </div>
           </div>
         ))}
-
-        <EditUserForm />
-        <CreateUserForm />
       </div>
     </div>
   );

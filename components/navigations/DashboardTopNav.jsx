@@ -4,14 +4,14 @@ import Link from "next/link";
 import SidebarToggler from "./SidebarToggler";
 import ProfileNav from "./ProfileNav";
 
-const TopNav = () => {
+const DashboardTopNav = () => {
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
         <SidebarToggler />
       </div>
       <div className="navbar-center">
-        <Link href="/" className="font-black normal-case text-xl">
+        <Link href="/dashboard" className="font-black normal-case text-xl">
           daisyUI
         </Link>
       </div>
@@ -23,4 +23,4 @@ const TopNav = () => {
   );
 };
 
-export default TopNav;
+export default DashboardTopNav;

@@ -36,14 +36,14 @@ const SideNav = () => {
       link: null,
       menu: [
         {
-          title: "List all",
-          link: "/dashboard/users/index",
-          icon: "FaUsers",
-        },
-        {
-          title: "Create",
+          title: "Add New",
           link: "/dashboard/users/create",
           icon: "FaUserPlus",
+        },
+        {
+          title: "List All",
+          link: "/dashboard/users/index",
+          icon: "FaUsers",
         },
       ],
     },

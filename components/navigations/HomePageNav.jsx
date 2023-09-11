@@ -10,7 +10,7 @@ const HomePageNav = () => {
         <ThemeToggler />
       </div>
       <div className="navbar-center">
-        <Link href="/" className="font-black normal-case text-xl">
+        <Link href="/home" className="font-black normal-case text-xl">
           daisyUI
         </Link>
       </div>

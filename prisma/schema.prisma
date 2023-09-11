@@ -11,55 +11,67 @@ datasource db {
 }
 
 model User {
-  id          String      @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  username    String      @unique
-  email       String      @unique
-  password    String
-  image       String?
-  contact     String?     @unique
-  state       String?
-  country     String?
-  company     String?
-  business    String?
-  address     String?
-  isBlocked   Boolean
-  isDeleted   Boolean
-  userRoles   UserRole[]
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  password  String
+  isBlocked Boolean
+  isDeleted Boolean
+  createdAt DateTime @default(now())
+  // one-to-one relation with profile model
+  profile   Profile?
+  // one-to-one relation with profile model
+  updatedAt DateTime @updatedAt
 }
 
-model Role {
-  id                  String              @id @default(auto()) @map("_id") @db.ObjectId
-  title               String              @unique
-  userRoles           UserRole[]
-  rolePermissions     RolePermission[]
-  createdAt           DateTime            @default(now())
-  updatedAt           DateTime            @updatedAt
+model Profile {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  username  String   @unique
+  img       String?
+  contact   String?  @unique
+  state     String?
+  country   String?
+  company   String?
+  business  String?
+  address   String?
+  // one-to-one relation with user model
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @unique @db.ObjectId
+  // one-to-one relation with user model
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model Permission {
-  id                  String              @id @default(auto()) @map("_id") @db.ObjectId
-  title               String 
-  desc                String
-  rolePermissions     RolePermission[]
-  createdAt           DateTime            @default(now())
-  updatedAt           DateTime            @updatedAt
-}
+// model Role {
+//   id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+//   title               String              @unique
+//   userRoles           UserRole[]
+//   rolePermissions     RolePermission[]
+//   createdAt           DateTime            @default(now())
+//   updatedAt           DateTime            @updatedAt
+// }
 
-model UserRole {
-  id      String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId  String  @db.ObjectId
-  roleId  String  @db.ObjectId
-  user    User    @relation(fields: [userId], references: [id])
-  role    Role    @relation(fields: [roleId], references: [id])
-}
+// model Permission {
+//   id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+//   title               String 
+//   desc                String
+//   rolePermissions     RolePermission[]
+//   createdAt           DateTime            @default(now())
+//   updatedAt           DateTime            @updatedAt
+// }
 
-model RolePermission {
-  id            String        @id @default(auto()) @map("_id") @db.ObjectId
-  permissionId  String        @db.ObjectId
-  roleId        String        @db.ObjectId
-  permission    Permission    @relation(fields: [permissionId], references: [id])
-  role          Role          @relation(fields: [roleId], references: [id])
-}
+// model UserRole {
+//   id      String  @id @default(auto()) @map("_id") @db.ObjectId
+//   userId  String  @db.ObjectId
+//   roleId  String  @db.ObjectId
+//   user    User    @relation(fields: [userId], references: [id])
+//   role    Role    @relation(fields: [roleId], references: [id])
+// }
+
+// model RolePermission {
+//   id            String        @id @default(auto()) @map("_id") @db.ObjectId
+//   permissionId  String        @db.ObjectId
+//   roleId        String        @db.ObjectId
+//   permission    Permission    @relation(fields: [permissionId], references: [id])
+//   role          Role          @relation(fields: [roleId], references: [id])
+// }

@@ -21,7 +21,7 @@ const ProfileNav = () => {
         </div>
       </button>
       {isDropDown && (
-        <div className="w-72 dropdown-open dropdown-content shadow-md bg-base-100 rounded-box">
+        <div className="w-72 dropdown-open dropdown-content shadow-md bg-base-100 rounded-box z-50">
           <div className="card-body py-3">
             <div className="flex flex-row justify-between items-center gap-3">
               <div className="w-1/4">

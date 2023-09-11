@@ -1,7 +1,14 @@
-export default function Home() {
-  return (
-    <main className="relative flex min-h-screen flex-col items-center justify-between">
-      Welcome to Homepage
-    </main>
-  );
-}
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
+const page = () => {
+  const router = useRouter();
+  useEffect(() => {
+    router.push("/home");
+  }, []);
+  return;
+};
+
+export default page;
